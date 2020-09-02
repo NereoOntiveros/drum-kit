@@ -12,6 +12,7 @@ for (var i = 0; i < drumButtonList.length; i++) {
 
     makeSound(buttonInnerHtml);
 
+    buttonAnimation(buttonInnerHtml);
   });
 
 }
@@ -19,6 +20,8 @@ for (var i = 0; i < drumButtonList.length; i++) {
 //detect keyboard pressed
 document.addEventListener("keydown", function(event){
   makeSound(event.key);
+
+  buttonAnimation(event.key);
 });
 
 function makeSound(key){
@@ -51,6 +54,17 @@ function makeSound(key){
       var tom4 = new Audio("sounds/tom-4.mp3");
       tom4.play();
       break;
-    default: console.log(buttonInnerHtml);
+    default: console.log(key);
   }
+}
+
+function buttonAnimation(currentKey){
+
+  var activeButton = document.querySelector("."+currentKey);
+  activeButton.classList.add('pressed');
+
+  setTimeout(function(){
+    activeButton.classList.remove('pressed');
+  },100);
+
 }
